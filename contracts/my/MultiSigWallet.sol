@@ -4,8 +4,6 @@ pragma solidity ^0.4.10;
 /// @title Multisignature wallet - Allows multiple parties to agree on transactions before execution.
 contract MultiSigWallet {
 
-    uint constant public MAX_OWNER_COUNT = 10;
-
     event Confirmation(address indexed sender, uint indexed transactionId);
     event Revocation(address indexed sender, uint indexed transactionId);
     event Submission(uint indexed transactionId);
@@ -32,12 +30,6 @@ contract MultiSigWallet {
 
     modifier onlyWallet() {
         if (msg.sender != address(this))
-            throw;
-        _;
-    }
-
-    modifier ownerDoesNotExist(address owner) {
-        if (isOwner[owner])
             throw;
         _;
     }
